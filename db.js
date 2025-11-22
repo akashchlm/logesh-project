@@ -5,11 +5,11 @@ let pool;
 const getPool = () => {
   if (!pool) {
     pool = mysql.createPool({
-      host: process.env.MYSQL_HOST,
-      port: Number(process.env.MYSQL_PORT || 3306),
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
+      host: process.env.MYSQLHOST,
+      port: Number(process.env.MYSQLPORT || 3306),
+      user: process.env.MYSQLUSER,
+      password: process.env.MYSQLPASSWORD,
+      database: process.env.MYSQLDATABASE,
       waitForConnections: true,
       connectionLimit: 5,
       maxIdle: 5,
@@ -21,7 +21,4 @@ const getPool = () => {
   return pool;
 };
 
-module.exports = getPool;
-
-
-
+module.exports = getPool();
