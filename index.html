@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pooja Essentials | Sacred Storefront</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-icon">🪔</span>
+        <span>Pooja Prasadam</span>
+      </div>
+      <nav class="main-nav">
+        <a href="#hero">Home</a>
+        <a href="#catalog">Products</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Enquiry</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn ghost" data-modal="loginModal">Login</button>
+        <button class="btn primary" data-modal="registerModal">Create Account</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Devotional essentials delivered with care</p>
+          <h1>One home for all your pooja products</h1>
+          <p class="subtext">
+            From handcrafted diyas to premium incense, curate meaningful rituals with authentic
+            supplies sourced from trusted artisans across India.
+          </p>
+          <div class="hero-cta">
+            <button class="btn primary" data-modal="registerModal">Get Started</button>
+            <button class="btn secondary" data-scroll="#catalog">Browse Catalog</button>
+          </div>
+          <ul class="hero-stats">
+            <li>
+              <span class="stat-number" id="statProducts">120+</span>
+              <span class="stat-label">Curated items</span>
+            </li>
+            <li>
+              <span class="stat-number">48 Hr</span>
+              <span class="stat-label">Avg. dispatch</span>
+            </li>
+            <li>
+              <span class="stat-number">4.9★</span>
+              <span class="stat-label">Community rated</span>
+            </li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <div class="card-header">
+            <p>Upcoming Ritual Kit</p>
+            <span class="badge">New</span>
+          </div>
+          <ul class="kit-list" id="kitList">
+            <li>Brass Diya Set</li>
+            <li>Organic Kumkum</li>
+            <li>Sandalwood Incense</li>
+            <li>Camphor Tablets</li>
+          </ul>
+          <p class="card-note">Pre-order festive kits for assured availability.</p>
+        </div>
+      </section>
+
+      <section id="services" class="services">
+        <article>
+          <h3>Authentic sourcing</h3>
+          <p>Direct partnerships with artisans for uncompromised purity and craftsmanship.</p>
+        </article>
+        <article>
+          <h3>Bulk fulfillment</h3>
+          <p>Dedicated delivery concierge for temples, event planners, and communities.</p>
+        </article>
+        <article>
+          <h3>Personalized kits</h3>
+          <p>Create made-to-order pooja hampers tailored to occasions and traditions.</p>
+        </article>
+      </section>
+
+      <section id="catalog" class="catalog">
+        <header>
+          <div>
+            <p class="eyebrow">Catalog</p>
+            <h2>Pooja product collections</h2>
+          </div>
+          <div class="catalog-actions">
+            <input type="search" id="searchInput" placeholder="Search diyas, incense, idols..." />
+            <select id="categoryFilter">
+              <option value="">All categories</option>
+            </select>
+          </div>
+        </header>
+        <div class="product-grid" id="productGrid"></div>
+        <div class="empty-state" id="productEmptyState" hidden>
+          <p>No products match your filters yet.</p>
+        </div>
+      </section>
+
+      <section class="cta-band" id="contact">
+        <div>
+          <h2>Need guidance picking the right samagri?</h2>
+          <p>Speak with our ritual concierge for quick recommendations and availability updates.</p>
+        </div>
+        <button class="btn light" data-modal="enquiryModal">Send enquiry</button>
+      </section>
+
+      <section id="customerDashboard" class="dashboard" hidden>
+        <header>
+          <div>
+            <p class="eyebrow">Customer space</p>
+            <h2>Welcome, <span id="customerName">Seeker</span></h2>
+            <p>Manage your cart, enquiries, and personalized picks.</p>
+          </div>
+          <div class="dashboard-actions">
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </header>
+
+        <div class="dashboard-grid">
+          <section>
+            <h3>Cart overview</h3>
+            <ul class="cart-list" id="cartList"></ul>
+            <p class="cart-total">Total: ₹ <span id="cartTotal">0.00</span></p>
+            <button class="btn primary" id="checkoutBtn">Checkout (mock)</button>
+          </section>
+          <section>
+            <h3>Submit enquiry</h3>
+            <form id="enquiryForm" class="stacked-form">
+              <label>
+                Product of interest
+                <select id="enquiryProduct"></select>
+              </label>
+              <label>
+                Preferred contact
+                <select id="enquiryContact">
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                </select>
+              </label>
+              <label>
+                Message
+                <textarea id="enquiryMessage" rows="4" placeholder="Share quantity, date, delivery city..."></textarea>
+              </label>
+              <button class="btn secondary" type="submit">Submit enquiry</button>
+              <p class="form-feedback" id="enquiryFeedback"></p>
+            </form>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p class="logo">
+          <span class="logo-icon">🪔</span>
+          Pooja Prasadam
+        </p>
+        <p>Crafting meaningful rituals with sustainably sourced supplies.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Support</p>
+        <a href="mailto:care@pooja-store.com">care@pooja-store.com</a>
+        <a href="tel:+919000000000">+91 90000 00000</a>
+      </div>
+      <div>
+        <p class="eyebrow">Admin</p>
+        <a href="admin.html">Master login</a>
+      </div>
+    </footer>
+
+    <div class="modal" id="loginModal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" data-close="loginModal">&times;</button>
+        <h3>Customer login</h3>
+        <form id="loginForm" class="stacked-form">
+          <label>
+            Username or email
+            <input type="text" id="loginIdentifier" required />
+          </label>
+          <label>
+            Password
+            <input type="password" id="loginPassword" required />
+          </label>
+          <button class="btn primary" type="submit">Login</button>
+          <p class="form-feedback" id="loginFeedback"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="registerModal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" data-close="registerModal">&times;</button>
+        <h3>Create customer account</h3>
+        <form id="registerForm" class="stacked-form">
+          <label>
+            Full name
+            <input type="text" id="regFullName" required />
+          </label>
+          <label>
+            Username
+            <input type="text" id="regUsername" required />
+          </label>
+          <label>
+            Email
+            <input type="email" id="regEmail" required />
+          </label>
+          <label>
+            Phone
+            <input type="tel" id="regPhone" required />
+          </label>
+          <label>
+            Password
+            <input type="password" id="regPassword" required minlength="8" />
+          </label>
+          <div class="captcha-row">
+            <div>
+              <label>Security caption</label>
+              <p class="captcha-visual" id="captchaVisual">------</p>
+            </div>
+            <button type="button" class="btn ghost" id="refreshCaptcha">Refresh</button>
+          </div>
+          <label>
+            Enter caption text
+            <input type="text" id="regCaptchaInput" required />
+          </label>
+          <button class="btn primary" type="submit">Register</button>
+          <p class="form-feedback" id="registerFeedback"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="enquiryModal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" data-close="enquiryModal">&times;</button>
+        <h3>Quick enquiry</h3>
+        <p>Please login to send detailed enquiries and track status.</p>
+        <button class="btn primary" data-modal="loginModal">Login now</button>
+      </div>
+    </div>
+
+    <div class="modal" id="toast" aria-hidden="true">
+      <div class="toast-content" id="toastMessage"></div>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
+

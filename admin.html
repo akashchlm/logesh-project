@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Console | Pooja Prasadam</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-surface">
+    <main class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="logo">
+          <span class="logo-icon">🔱</span>
+          <div>
+            <p>Pooja Prasadam</p>
+            <small>Master Control</small>
+          </div>
+        </div>
+        <nav>
+          <a href="#adminLogin">Login</a>
+          <a href="#catalogAdmin">Catalog</a>
+          <a href="#customersAdmin">Customers</a>
+          <a href="#enquiriesAdmin">Enquiries</a>
+          <a href="#deliveriesAdmin">Deliveries</a>
+        </nav>
+        <button class="btn ghost" onclick="window.location.href='index.html'">← Back to site</button>
+      </aside>
+
+      <section class="admin-main">
+        <header>
+          <h1>Admin dashboard</h1>
+          <p>Manage catalog, customers, deliveries, and master logins.</p>
+          <div class="dashboard-actions">
+            <button class="btn ghost" id="adminLogoutBtn">Logout</button>
+          </div>
+        </header>
+
+        <section id="adminLogin" class="admin-card">
+          <h2>Master login</h2>
+          <form id="adminLoginForm" class="stacked-form compact">
+            <label>
+              Username or email
+              <input type="text" id="adminLoginIdentifier" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="adminLoginPassword" required />
+            </label>
+            <button class="btn primary" type="submit">Login as admin</button>
+            <p class="form-feedback" id="adminLoginFeedback"></p>
+          </form>
+        </section>
+
+        <section id="catalogAdmin" class="admin-card">
+          <header class="admin-card-header">
+            <div>
+              <p class="eyebrow">Catalog</p>
+              <h2>Manage product listings</h2>
+            </div>
+            <button class="btn primary" id="toggleProductForm">+ New product</button>
+          </header>
+          <form id="productForm" class="stacked-form compact" hidden>
+            <input type="hidden" id="productId" />
+            <label>Name <input type="text" id="productName" required /></label>
+            <label>Description <textarea id="productDescription" rows="2"></textarea></label>
+            <label>Category <input type="text" id="productCategory" /></label>
+            <div class="dual-fields">
+              <label>Price (₹) <input type="number" step="0.01" id="productPrice" required /></label>
+              <label>Stock <input type="number" id="productStock" /></label>
+            </div>
+            <label>Image URL <input type="url" id="productImage" /></label>
+            <div class="form-row">
+              <button class="btn secondary" type="submit">Save product</button>
+              <button class="btn ghost" type="button" id="cancelProductEdit">Cancel</button>
+            </div>
+            <p class="form-feedback" id="productFormFeedback"></p>
+          </form>
+          <table class="data-table" id="productsTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section id="customersAdmin" class="admin-card">
+          <header class="admin-card-header">
+            <div>
+              <p class="eyebrow">Customers</p>
+              <h2>Customer directory</h2>
+            </div>
+          </header>
+          <table class="data-table" id="customersTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Joined</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section id="enquiriesAdmin" class="admin-card">
+          <header class="admin-card-header">
+            <div>
+              <p class="eyebrow">Enquiries</p>
+              <h2>Track leads</h2>
+            </div>
+          </header>
+          <table class="data-table" id="enquiriesTable">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Message</th>
+                <th>Contact</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section id="deliveriesAdmin" class="admin-card">
+          <header class="admin-card-header">
+            <div>
+              <p class="eyebrow">Deliveries</p>
+              <h2>Delivery management</h2>
+            </div>
+            <button class="btn primary" id="toggleDeliveryForm">+ New delivery</button>
+          </header>
+          <form id="deliveryForm" class="stacked-form compact" hidden>
+            <label>Order reference <input type="text" id="deliveryOrderRef" required /></label>
+            <label>Status
+              <select id="deliveryStatus">
+                <option value="Pending">Pending</option>
+                <option value="Packed">Packed</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            </label>
+            <label>Expected date <input type="date" id="deliveryExpected" /></label>
+            <label>Notes <textarea id="deliveryNotes" rows="2"></textarea></label>
+            <button class="btn secondary" type="submit">Save delivery</button>
+            <p class="form-feedback" id="deliveryFormFeedback"></p>
+          </form>
+          <table class="data-table" id="deliveriesTable">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Expected</th>
+                <th>Notes</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+
+    <div class="modal" id="adminToast" aria-hidden="true">
+      <div class="toast-content" id="adminToastMessage"></div>
+    </div>
+
+    <script src="admin.js" type="module"></script>
+  </body>
+</html>
+
