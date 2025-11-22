@@ -42,17 +42,19 @@ router.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    const [existing] = await pool.query(
-      'SELECT id FROM users WHERE email = ? OR username = ?',
+    // PostgreSQL version
+    const existingResult = await pool.query(
+      'SELECT id FROM users WHERE email = $1 OR username = $2',
       [email, username]
     );
 
-    if (existing.length > 0) {
+    if (existingResult.rows.length > 0) {
       return res.status(409).json({ message: 'User already exists' });
     }
 
     await pool.query(
-      'INSERT INTO users (full_name, username, email, phone, password_hash, role) VALUES (?, ?, ?, ?, ?, ?)',
+      `INSERT INTO users (full_name, username, email, phone, password_hash, role)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
       [fullName, username, email, phone, hashedPassword, 'customer']
     );
 
@@ -71,16 +73,20 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    const [users] = await pool.query(
-      'SELECT id, username, email, password_hash, role, full_name FROM users WHERE email = ? OR username = ? LIMIT 1',
-      [usernameOrEmail, usernameOrEmail]
+    const userResult = await pool.query(
+      `SELECT id, username, email, password_hash, role, full_name 
+       FROM users 
+       WHERE email = $1 OR username = $1 
+       LIMIT 1`,
+      [usernameOrEmail]
     );
 
-    if (users.length === 0) {
+    if (userResult.rows.length === 0) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const user = users[0];
+    const user = userResult.rows[0];
+
     const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -111,4 +117,3 @@ router.post('/login', async (req, res) => {
 });
 
 module.exports = router;
-
